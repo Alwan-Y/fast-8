@@ -102,10 +102,31 @@ const updateEmployeeSchema = Joi.object({
         .valid("manager","director","staff"),
 })
 
+const fibonacciSchema = Joi.object({
+    n: Joi
+    .number()
+    .integer()
+    .required(),
+})
+
+const cobinationSchema = Joi.object({
+    n: Joi
+    .number()
+    .integer()
+    .required(),
+
+    r: Joi
+    .number()
+    .integer()
+    .required(),
+})
+
 module.exports = {
     companiesSchema,
     employeesSchema,
     checkIdSchema,
     checkIdCompanySchema,
-    updateEmployeeSchema
+    updateEmployeeSchema,
+    fibonacciSchema,
+    cobinationSchema
 }

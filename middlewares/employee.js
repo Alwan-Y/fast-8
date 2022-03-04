@@ -14,9 +14,9 @@ const EmployeesMiddlewares = {
 
             return next()
         } catch(error) {
-            return res.status(500).json({
-                succes: false,
-                kode: 500,
+            return res.status(400).json({
+                code: 400,
+                data: null,
                 msg: error.message
             })
         }
@@ -34,9 +34,9 @@ const EmployeesMiddlewares = {
 
             return next()
         } catch(error) {
-            return res.status(500).json({
-                succes: false,
-                kode: 500,
+            return res.status(400).json({
+                code: 400,
+                data: null,
                 msg: error.message
             })
         }

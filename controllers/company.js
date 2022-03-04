@@ -4,17 +4,27 @@ const sequelize = require('../config/sequelize')
 const CompaniesController = {
     getCompanies: async (req, res) => {
         try {
-            const getAllData = await Companies.findAll()
+
+            const [
+                count,
+                data
+            ] = await Promise.all([
+                Companies.count(),
+                Companies.findAll()
+            ])
 
             return res.status(200).json({
-                succes: true,
-                kode: 200,
-                msg: getAllData
+                code: 200,
+                data: {
+                    count: count,
+                    rows: data
+                },
+                msg: "Success"
             })
         } catch (error) {
             return res.status(500).json({
-                succes: false,
-                kode: 500,
+                code: 500,
+                data: null,
                 msg: error.message
             })
         }
@@ -30,14 +40,14 @@ const CompaniesController = {
             transaction.commit()
 
             return res.status(200).json({
-                succes: true,
-                kode: 200,
-                msg: 'Succes add new companie !'
+                code: 200,
+                data: req.body,
+                msg: "Success"
             })
         } catch(error) {
             return res.status(500).json({
-                succes: false,
-                kode: 500,
+                code: 500,
+                data: null,
                 msg: error.message
             })
         }
@@ -60,15 +70,19 @@ const CompaniesController = {
             transaction.commit()
 
             return res.status(200).json({
-                succes: true,
-                kode: 200,
-                msg: 'Succes set companie to active !'
+                code: 200,
+                data: {
+                    isActive: true
+                },
+                msg: 'Success'
             })
 
         } catch(error) {
             return res.status(500).json({
-                succes: false,
-                kode: 500,
+                code: 500,
+                data: {
+                    isActive: false
+                },
                 msg: error.message
             })
         }

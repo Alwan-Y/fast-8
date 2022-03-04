@@ -7,16 +7,18 @@ const EmployeesController = {
         try {
             const { id } = req.params
             const getAllDataEmployeeByIdCompanies = await Companies.findOne({
-                attributes: ['company_name'],
+                attributes: ['id', 'company_name', 'is_active'],
                 include: [{
                     model: Employees
                 }]
             }, { where : { id } })
 
             return res.status(200).json({
-                succes: true,
-                kode: 200,
-                msg: getAllDataEmployeeByIdCompanies
+                code: 200,
+                data: {
+                    getAllDataEmployeeByIdCompanies
+                },
+                msg: "Success"
             })
         } catch(error) {
             return res.status(500).json({
@@ -31,13 +33,15 @@ const EmployeesController = {
         try {
             const { id } = req.params
             const getEmployeeById = await Employees.findOne({
+                attributes: ['id', 'name', 'phone_number', 'jobtitle']
+            },{
                 where : { id }
             })
 
             return res.status(200).json({
-                succes: true,
-                kode: 200,
-                msg: getEmployeeById
+                code: 200,
+                data: getEmployeeById,
+                msg: "Success"
             })
 
         } catch(error) {
@@ -63,9 +67,11 @@ const EmployeesController = {
             transaction.commit()
 
             return res.status(200).json({
-                succes: true,
-                kode: 200,
-                msg: 'Succes add new employee !'
+                code: 200,
+                data: {
+                    company_id: req.params.company_id
+                },
+                msg: "Success"
             })
         } catch(error) {
             return res.status(500).json({
@@ -91,9 +97,10 @@ const EmployeesController = {
             transaction.commit()
 
             return res.status(200).json({
-                succes: true,
-                kode: 200,
-                msg: 'Succes update employee !'
+                data: {
+                    company_id: req.params.company_id
+                },
+                msg: "Success"
             })
         } catch(error) {
             return res.status(500).json({

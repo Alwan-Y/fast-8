@@ -28,9 +28,9 @@ const fibonaci = async (req, res) => {
     }
 
     return res.status(200).json({
-        succes: true,
-        kode: 200,
-        msg: display
+        code: 200,
+        data: display,
+        msg: "Success"
     })
 }
 
@@ -80,9 +80,9 @@ const combination = async (req, res) => {
         let result = n / multiplication
 
         return res.status(200).json({
-                succes: true,
-                kode: 200,
-                msg: result
+            code: 200,
+            data: result,
+            msg: "Success"
             }
         )
     }
@@ -107,15 +107,15 @@ const getCountries = async (req, res) => {
         })
 
         return res.status(200).json({
-            succes: true,
-            kode: 200,
-            msg: newData
+            code: 200,
+            data: newData,
+            msg: "Success"
         })
 
     } catch(error) {
         return res.status(500).json({
-            succes: false,
-            kode: 500,
+            code: 500,
+            data: null,
             msg: error.message
         })
     }
