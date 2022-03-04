@@ -4,14 +4,6 @@ const fibonaci = async (req, res) => {
     let { n } = req.body
     parseInt(n)
 
-    if (!n) {
-        return res.status(404).json({
-            succes: false,
-            kode: 500,
-            msg: 'n is required'
-        })
-    }
-
     let n1 = 0
     let n2 = 1
 
@@ -19,8 +11,6 @@ const fibonaci = async (req, res) => {
     let display = [0, 1]
 
     while(nextN < n) {
-        console.log(n2)
-        console.log(nextN)
         n1 = n2
         n2 = nextN
         nextN = n1 + n2
@@ -43,8 +33,6 @@ const loopForCombination = ( val ) => {
         } else {
             valAfter = valAfter * i
         }
-        console.log(`ini val i ${i}`)
-        console.log(`ini val after ${valAfter}`)
     }
 
     return valAfter
@@ -66,16 +54,12 @@ const combination = async (req, res) => {
         let nBefore = n
         let rBefore = r
         n = loopForCombination(n)
-        // console.log(`ini nilai n ${n}`)
         r = loopForCombination(r)
-        // console.log(`ini nilai r ${r}`)
 
 
         let subtraction = nBefore - rBefore
         let subtractionFaktorial = loopForCombination(subtraction)
-        // console.log(`ini nilai subtraction ${subtraction}`)
         let multiplication = r * subtractionFaktorial
-        // console.log(`ini nilai multiplication ${multiplication}`)
 
         let result = n / multiplication
 
